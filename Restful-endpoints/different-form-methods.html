@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Different Form Methods</title>
+</head>
+
+<body>
+    <!-- clicking on this <a> tag will make a GET / request -->
+    <a href="/">Link to Resource</a>
+    <!--submit form-->
+    <form action="/" method="POST">
+        <button type="submit">submit form</button>
+    </form>
+    <!--  access post page-->
+    <form action="/post" method="GET">
+        <button type="submit">ACCESS post page</button>
+    </form>
+
+    <!-- Access the edit page for a post -->
+    <form action="/post/1/edit" method="GET">
+        <button type="submit">ACCESS edit page</button>
+    </form>
+    <!--Access create page for the post-->
+    <form action="/post/new" method="GET">
+        <button type="submit">ACCESS create page</button>
+    </form>
+    <!--create new user-->
+    <form action="/user/new" method="GET">
+        <button type="submit">ACCESS create user page</button>
+    </form>
+    <!--login-->
+    <form action="/login" method="GET">
+        <button type="submit">ACCESS login page</button>
+    </form>
+    <!--logout-->
+    <form action="/logout" method="GET">
+        <button type="submit">ACCESS logout page</button>
+    </form>
+    <!--access comments for the post page-->
+    <form action="/post/1/comments" method="GET">
+        <button type="submit">ACCESS comments page</button>
+    </form>
+    <!--access create page for the post comment-->
+    <form action="/post/1/comments/new" method="GET">
+        <button type="submit">ACCESS create comment page</button>
+    </form>
+    <!--access edit page for the comment-->
+    <form action="/post/1/comments/1/edit" method="GET">
+        <button type="submit">ACESS edit page comment</button>
+    </form>
+    <!--submit like for a post-->
+    <form action="/post/1/like" method="POST">
+        <button type="submit">submit like </button>
+    </form>
+    <!--delete like for a post-->
+    <form action="/post/like/delete" method="DELETE">
+        <button type="submit">delete like</button>
+    </form>
+    <!--access all posts of a user -->
+    <form action="/post/1" method="GET">
+        <button type="submit">ACESS all posts of a user</button>
+    </form>
+    <!--submit search on a posts-->
+    <form action="/post/search" method="POST">
+        <button type="submit">submit search on a posts</button>
+    </form>
+
+
+    <!-- submitting this <form> will make a POST / request -->
+    <form action="/" method="POST">
+        <button type="submit">POST</button>
+    </form>
+
+    <!-- submitting this <form> will make a GET / request -->
+    <form action="/" method="PATCH">
+        <button type="submit">PATCH</button>
+    </form>
+
+    <!-- submitting this <form> will make a GET / request -->
+    <form action="/" method="PUT">
+        <button type="submit">PUT</button>
+    </form>
+
+    <!-- submitting this <form> will make a GET / request -->
+    <form action="/" method="DELETE">
+        <button type="submit">DELETE</button>
+    </form>
+</body>
+
+</html>
