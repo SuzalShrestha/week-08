@@ -34,28 +34,30 @@ website. Move on to the next request/response documentation.
 ### Ask for a page that doesn't exist
 
 Request components:
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method:GET
+- URL:http://localhost:5000/doesnotexist
+- Headers:none
+- Body:none
 
 Response components:
-- Status code:
+- Status code:404 not found
 - Headers: 
-- Body:
+          Content-type:text/html
+- Body:404 not found
 
 ### Ask for the products list page
 
 Request components:
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method:GET
+- URL:http://localhost:5000/products
+- Headers:none
+- Body:none
 
 Response components:
-- Status code: 
+- Status code: 200 OK
 - Headers:
-- Body: 
+          Content-type:text/html
+- Body: list of products
 
 ### Ask for the product detail page
 
@@ -70,15 +72,16 @@ Here's an example product on the server:
 | categories  | "beauty", "electronics"                                    |
 
 Request components:
-- Method:
-- URL: 
-- Headers: 
-- Body: 
+- Method:GET
+- URL: https://localhost:5000/products/1
+- Headers: none
+- Body: none
 
 Response components:
-- Status code: 
+- Status code:200 OK 
 - Headers:
-- Body: 
+          Content-type:text/html
+- Body: details of productID
 
 ### Ask for the create new product page
 
