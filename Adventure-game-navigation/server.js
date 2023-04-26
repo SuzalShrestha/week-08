@@ -98,26 +98,28 @@ const server = http.createServer((req, res) => {
       switch (action) {
         case "take":
           player.takeItem(itemId);
-          console.log("taken")
+          console.log("taken");
           break;
         case "drop":
           player.dropItem(itemId);
           break;
         case "eat":
-          if(player._getItem(itemId).isFood===true){
-              console.log("eating");
+          if (player._getItem(itemId).isFood === true) {
+            console.log("eating");
             player.eatItem(itemId);
-          }else{
-            res.statusCode=404;
+          } else {
+            res.statusCode = 404;
             res.setHeader("Content-Type", "text/html");
-            const resBody=fs.readFileSync("./views/error.html", "utf-8");
-            const errorMsg=resBody.replace(/#{errorMessage}/g,"You can't eat this").replace(/#{roomId}/g, player.currentRoom.id);
+            const resBody = fs.readFileSync("./views/error.html", "utf-8");
+            const errorMsg = resBody
+              .replace(/#{errorMessage}/g, "You can't eat this")
+              .replace(/#{roomId}/g, player.currentRoom.id);
             res.write(errorMsg);
             return res.end();
           }
           break;
       }
-      res.statusCode=302;
+      res.statusCode = 302;
       res.setHeader("Location", `/rooms/${player.currentRoom.id}`);
       return res.end();
     }
@@ -125,7 +127,6 @@ const server = http.createServer((req, res) => {
     res.statusCode = 302;
     res.setHeader("Location", `/rooms/${player.currentRoom.id}`);
     return res.end();
-
   });
 });
 
