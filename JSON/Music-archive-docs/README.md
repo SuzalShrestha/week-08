@@ -142,7 +142,7 @@ Request components:
 
 Response components:
 
-- Status code: 200
+- Status code: 201
 - Headers:  content-type:application/json
   
 - Body: 
@@ -158,20 +158,21 @@ Response components:
   }
 ]
 ```
-]
-```
 
 ### Edit a specified artist by artistId
 
 Request components:
 
 - Method: PUT
-- URL: /artists/:artistId/edit
+- URL: /artists/:artistId
 - Headers:  content-type:application/json
 - Body: 
 ```json
 {
-  "name": "edit this artist"
+  "name": "edit this artist",
+    "artistId": 1,
+    "updatedAt": "2023-05-01T09:00:59.853Z"
+
 }
 ```
 
@@ -191,8 +192,6 @@ Response components:
     "artistId": 2,
     "name": "edit this artist"
   }
-]
-```
 ]
 ```
 
@@ -276,7 +275,7 @@ Request components:
 
 Response components:
 
-- Status code:  200
+- Status code:  201
 - Headers:  content-type:application/json
 - Body: 
 ```json
@@ -434,7 +433,7 @@ Request components:
 
 - Method:GET
 - URL: /songs/:songId
-- Headers:  content-type:application/json
+- Headers:  none
 - Body: none
 
 Response components:
