@@ -174,6 +174,141 @@ const server = http.createServer((req, res) => {
       res.write(JSON.stringify(newAlbum));
       return res.end();
     }
+    //9
+    if (
+      req.method === "PUT" &&
+      req.url.startsWith("/albums") &&
+      req.url.split("/").length === 3
+    ) {
+      const albumId = req.url.split("/")[2];
+      albums[albumId].name = req.body.name;
+      albums[albumId].updatedAt = new Date();
+
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(albums[albumId]));
+      return res.end();
+    }
+    //10
+    if (
+      req.method === "DELETE" &&
+      req.url.startsWith("/albums") &&
+      req.url.split("/").length === 3
+    ) {
+      const albumId = req.url.split("/")[2];
+      delete albums[albumId];
+      const sucessMsg = {};
+      sucessMsg.message = "Album deleted successfully";
+
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(sucessMsg));
+      return res.end();
+    }
+    //11
+    if (
+      req.method === "GET" &&
+      req.url.startsWith("/artists") &&
+      req.url.split("/")[3] === "songs"
+    ) {
+      const artistId = req.url.split("/")[2];
+      const artistSongs = songs[artistId];
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(artistSongs));
+      return res.end();
+    }
+    //12
+    if (
+      req.method === "GET" &&
+      req.url.startsWith("/albums") &&
+      req.url.split("/")[3] === "songs"
+    ) {
+      const albumId = req.url.split("/")[2];
+      let albumSongs;
+      for (let i = 1; i <= Object.keys(songs).length; i++) {
+        if (songs[i].albumId == albumId) {
+          albumSongs = songs[i];
+        }
+      }
+      if (!albumSongs) {
+        res.statusCode = 404;
+        res.setHeader("Content-Type", "application/json");
+        res.write("Album not found");
+        return res.end();
+      }
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(albumSongs));
+      return res.end();
+    }
+    //13
+    if (
+      (req.method =
+        "GET" &&
+        req.url.startsWith("/trackNumbers") &&
+        req.url.split("/")[3] === "songs")
+    ) {
+      const trackNumber = req.url.split("/")[2];
+      let trackSongs;
+      for (let i = 1; i <= Object.keys(songs).length; i++) {
+        if (songs[i].trackNumber == trackNumber) {
+          trackSongs = songs[i];
+        }
+      }
+      if (!trackSongs) {
+        res.statusCode = 404;
+        res.setHeader("Content-Type", "application/json");
+        res.write("Track number not found");
+        return res.end();
+      }
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(trackSongs));
+      return res.end();
+    }
+    //14
+    if (
+      req.method === "GET" &&
+      req.url.startsWith("/songs") &&
+      req.url.split("/").length === 3
+    ) {
+      const songId = req.url.split("/")[2];
+      for (let i = 1; i <= Object.keys(songs).length; i++) {
+        if (songs[i].songId == songId) {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.write(JSON.stringify(songs[i]));
+          return res.end();
+        }
+      }
+      res.statusCode = 404;
+      res.setHeader("Content-Type", "application/json");
+      res.write("Song not found");
+      return res.end();
+    }
+    //15
+    if (
+      req.method === "POST" &&
+      req.url.startsWith("/albums") &&
+      req.url.split("/")[3] === "songs"
+    ) {
+      const newSong = {};
+      const albumId = req.url.split("/")[2];
+      const songId = getNewSongId();
+      newSong.name = req.body.name;
+      newSong.lyrics = req.body.lyrics;
+      newSong.trackNumber = req.body.trackNumber;
+      newSong.songId = songId;
+      newSong.albumId = albumId;
+      songs[songId] = newSong;
+
+      res.statusCode = 201;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(newSong));
+      return res.end();
+    }
+
     res.statusCode = 404;
     res.setHeader("Content-Type", "application/json");
     res.write("Endpoint not found");
