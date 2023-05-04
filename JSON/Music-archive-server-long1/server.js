@@ -308,6 +308,40 @@ const server = http.createServer((req, res) => {
       res.write(JSON.stringify(newSong));
       return res.end();
     }
+    //16
+    if (
+      req.method === "PUT" &&
+      req.url.startsWith("/songs") &&
+      req.url.split("/").length === 3
+    ) {
+      const songId = req.url.split("/")[2];
+      songs[songId].name = req.body.name;
+      songs[songId].lyrics = req.body.lyrics;
+      songs[songId].trackNumber = req.body.trackNumber;
+      songs[songId].updatedAt = new Date();
+
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(songs[songId]));
+      return res.end();
+    }
+    //17
+    if (
+      (req.method =
+        "DELETE" &&
+        req.url.startsWith("/songs") &&
+        req.url.split("/").length === 3)
+    ) {
+      const songId = req.url.split("/")[2];
+      delete songs[songId];
+      const sucessMsg = {};
+      sucessMsg.message = "Song deleted successfully";
+
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(sucessMsg));
+      return res.end();
+    }
 
     res.statusCode = 404;
     res.setHeader("Content-Type", "application/json");
